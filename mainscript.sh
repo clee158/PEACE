@@ -1,6 +1,5 @@
 #!/bin/bash
-#TARGET=/home/linaro/pic
-TARGET=./pic
+TARGET=./pics
 
 export APIKEY=""
 export ACCESSKEY=""
