@@ -82,8 +82,8 @@ def analyze_file(image_url):
 def sort_results(faces):
         emotions = []
         print(faces)
-        emotion_result = faces['faceAttributes']['emotion']
         for face in faces:
+                emotion_result = face['faceAttributes']['emotion']
                 person = []
 		# Good
                 person.append([
@@ -136,27 +136,27 @@ def print_result(emotions):
 			print("{} : {} {}%".format(e[0], bar, e[1] * 100))
 
 def play_sound(emotions):
-	topResults = []
-	for emotion in emotions:
-		topResults.append(emotion[0][0])
+    topResults = []
+    sound_directory_path = "./sounds/"
+    for emotion in emotions:
+        topResults.append(emotion[0][0])
 
-	if "Scared    " in topResults:
-		sound = 'slowDown.mp3'
-	elif "Frustrated" in topResults:
-		sound = 'frustration.mp3'
-	elif "Sad       " in topResults:
-		sound = 'checkOnPassenger.mp3'
-	else:
-		sound = 'good.mp3'
+    if "Scared    " in topResults:
+        sound = sound_directory_path + 'slowDown.mp3'
+    elif "Frustrated" in topResults:
+        sound = sound_directory_path + 'frustration.mp3'
+    elif "Sad       " in topResults:
+        sound = sound_directory_path + 'checkOnPassenger.mp3'
+    else:
+        sound = sound_directory_path + 'good.mp3'
 
-
-	p = vlc.MediaPlayer(sound)
-	try:
-            p.play()
-            time.sleep(MP3(sound).info.length + 2)
-	except:
-            print("stopping sound")
-            p.stop()
+    p = vlc.MediaPlayer(sound)
+    try:
+        p.play()
+        time.sleep(MP3(sound).info.length + 2)
+    except:
+        print("stopping sound")
+        p.stop()
 
 print('Check env')
 env_check(env_vars)

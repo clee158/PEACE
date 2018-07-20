@@ -15,5 +15,5 @@ do
 
     FILENAME=$RANDOM.jpg
     gst-launch-1.0 v4l2src num-buffers=1 ! jpegenc ! filesink location=$TARGET/$FILENAME
-    python3 ~/qdroptables/analysis.py $TARGET/$FILENAME
+    python3 ./analysis.py $TARGET/$FILENAME
 done
