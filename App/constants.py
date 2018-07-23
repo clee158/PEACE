@@ -4,6 +4,8 @@ SECRET_KEY = "SECRETKEY"
 
 ENV_VARS = [API_KEY, ACCESS_KEY, SECRET_KEY]
 
+IMG_FILE_PATH = "pics/"
+
 BUCKET_NAME = "rating-imgs"
 
 FACE_API_URL = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect"
@@ -24,3 +26,10 @@ REQUEST_PARAMS = {
     'returnFaceAttributes': 'emotion'
 }
 
+# Analysis.py
+analysis_ip="localhost"
+analysis_port=8081
+
+# gui.py
+gui_ip="localhost"
+gui_port=8082
