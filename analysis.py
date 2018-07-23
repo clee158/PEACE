@@ -17,36 +17,36 @@ ip = const.analysis_ip
 port = const.analysis_port
 s.bind((ip, port))
 s.listen(1)
-print("Listening on {}:{}...".format(ip,port))
 
 while True:
+    print("Listening on {}:{}...".format(ip,port))
     conn,address = s.accept()
     buf = conn.recv(64)
     if len(buf) > 0:
         file_path = buf.decode('ascii')
-        print(' [x] Recieved: {}'.format(file_path))
+        print(' [x] Msg Recieved: {}'.format(file_path))
 #       file_path = sys.argv[-1]
 
-        print('Check env')
+        print(' [x] Check env')
         validations.env_check(const.ENV_VARS)
 
-        print('Check file for validity')
+        print(' [x] Check file for validity')
         validations.check_file(file_path)
 
-        print('Upload to S3')
+        print(' [x] Upload to S3')
         fileUrl = aws.upload_images(file_path)
 
-        print('Delete Local File')
+        print(' [x] Delete Local File')
         validations.remove_file(file_path)
 
-        print('Run Analysis')
+        print(' [x] Run Analysis')
         faces = emotion.analyze_file(fileUrl)
 
-        print('Sort Result')
+        print(' [x] Sort Result')
         emotions = custom.sort_results(faces)
 
-        print('Display Result')
+        print(' [x] Display Result')
         custom.print_result(emotions)
-
-        print('Play Sound')
+        print()
+        #print(' [x] Play Sound')
         sound.play_sound(emotions)
