@@ -1,4 +1,5 @@
 #!/bin/bash
+
 TARGET=./pics
 
 export APIKEY=""
@@ -7,13 +8,16 @@ export SECRETKEY=""
 
 while true
 do
-    echo "ready"
+    echo "=====> ready"
     sleep 1s
-    echo "set"
+    echo "==========> set"
     sleep 1s
-    echo "cheese!"
+    echo "================> cheese!"
 
     FILENAME=$RANDOM.jpg
-    gst-launch-1.0 v4l2src num-buffers=1 ! jpegenc ! filesink location=$TARGET/$FILENAME
+    gst-launch-1.0 v4l2src num-buffers=1 ! jpegenc ! filesink location=$TARGET/$FILENAME >/dev/null
     python3 ./analysis.py $TARGET/$FILENAME
+    echo ""
+    echo "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *"
+    echo ""
 done
