@@ -1,8 +1,12 @@
 from threading import *
 from collections import OrderedDict
+import json, socket
 from Tkinter import *
 from PIL import Image, ImageTk
-import json
+
+import App.constants as const
+import cPickle
+
 
 window = Tk()
 emotions = {'happy':'green', 'sad':'yellow', 'frustrated':'purple', 'scared':'red'}
@@ -45,3 +49,23 @@ def create_window(filepath, data):
 json_file = open('../../../Downloads/data.txt').read()
 data = json.loads(json_file.decode('utf-8'), object_pairs_hook=OrderedDict)
 gui("./index.jpeg", data)
+
+try:
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    print("Socket successfully created")
+except socket.error as err:
+    print("Socket creation failed with error %s" % err)
+
+ip = const.gui_ip
+port = const.gui_port
+s.bind((ip, port))
+s.listen(1)
+
+while True:
+    print("Listening on {}:{}...".format(ip,port))
+    conn,address = s.accept()
+    buf = conn.recv(1024)
+    if len(buf) > 0:
+        msg = cPickle.loads(buf)
+        print msg
+        # add things here
