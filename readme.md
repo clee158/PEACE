@@ -15,7 +15,7 @@ Analyzing the passenger's emotions in order to rate the driving quality
 ## How do run it
 
 ### Step 1: Setup all of the hardware components
-- Please refer to documentation [here](docs/hardware.md)
+- Please refer to documentation [here](hardware.md)
 
 ### Step 2: Install all dependencies
 - Run the install script
@@ -26,4 +26,4 @@ Analyzing the passenger's emotions in order to rate the driving quality
 ### Step 3: TBA
 
 ## Hardware components
-Please refer to documentation [here](docs/hardware.md)
+Please refer to documentation [here](hardware.md)
