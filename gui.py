@@ -1,4 +1,4 @@
-import threading
+import threading, ast
 import json, socket
 from Tkinter import *
 from PIL import Image, ImageTk
@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 import App.constants as const
 import cPickle
 
-
+'''
 window = Tk()
 
 def gui():
@@ -42,7 +42,13 @@ def window(filepath, data):
 with open('../Downloads/data.txt') as json_file:
     data = json.load(json_file)
     window("./index.jpeg", data)
+'''
 
+def convert_keys_to_string(d):
+    if not isinstance(d, dict):
+        return d
+    return dict((str(k), convert_keys_to_string(v))
+        for k,v in d.items())
 
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -62,4 +68,7 @@ while True:
     if len(buf) > 0:
         msg = cPickle.loads(buf)
         print msg
+        for person in msg['results']:
+            print person['emotion']
+        print msg['filepath'].decode('utf8')
 
