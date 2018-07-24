@@ -3,6 +3,7 @@ from collections import OrderedDict
 import json, socket
 from Tkinter import *
 from PIL import Image, ImageTk
+import logging
 
 import App.constants as const
 import cPickle
@@ -11,9 +12,10 @@ import cPickle
 window = Tk()
 emotions = {'happy':'green', 'sad':'yellow', 'frustrated':'purple', 'scared':'red'}
 
-def gui(filepath, data):
-    #Thread(target=create_window(filepath, data['results'])).start()
-    pass
+#def gui(filepath, data):
+    #json_file = open('../../../Downloads/data.txt').read()
+    #data = json.loads(json_file.decode('utf-8'), object_pairs_hook=OrderedDict)
+#    create_window(filepath, data['results'])
 
 def create_window(filepath, data):
     # set up image
@@ -21,7 +23,7 @@ def create_window(filepath, data):
     w, h = img.size
 
     # set up window
-    window.title("Testing")
+    window.title(filepath)
     window.configure(background='black')
     window.geometry("%dx%d" % (w+200, h+200))
     
@@ -46,10 +48,7 @@ def create_window(filepath, data):
     # open window
     window.mainloop()
 
-json_file = open('../../../Downloads/data.txt').read()
-data = json.loads(json_file.decode('utf-8'), object_pairs_hook=OrderedDict)
-gui("./index.jpeg", data)
-
+## main start
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     print("Socket successfully created")
@@ -61,11 +60,26 @@ port = const.gui_port
 s.bind((ip, port))
 s.listen(1)
 
+t = None
+
 while True:
     print("Listening on {}:{}...".format(ip,port))
     conn,address = s.accept()
     buf = conn.recv(1024)
     if len(buf) > 0:
         msg = cPickle.loads(buf)
+        # if there is a existing thread kill it
+        if t is not None and t.isAlive():
+            t._Thread_stop()
+        
+        #for thread in enumerate():
+        #  if thread.isAlive():
+        #       thread._Thread_stop()
+        
+        #create a new thread
+        filepath = 'filepath'
+        data= 'data'
+        t = Thread(name='blocking', target=gui(), args=(filepath, data))
+        t.start()
         print msg
-        # add things here
+        
