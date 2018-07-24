@@ -5,11 +5,11 @@ import json, socket
 from Tkinter import *
 from PIL import Image, ImageTk
 import logging
+import operator
 
 import App.constants as const
 import cPickle
 
-window = Tk()
 emotions = {'happy':'green', 'sad':'yellow', 'frustrated':'purple', 'scared':'red'}
 
 def create_window(filepath, data):
@@ -18,6 +18,7 @@ def create_window(filepath, data):
     w, h = img.size
 
     # set up window
+    window = Tk()
     window.title(filepath)
     window.configure(background='black')
     window.geometry("%dx%d" % (w+200, h+200))
@@ -35,8 +36,9 @@ def create_window(filepath, data):
         y1 = obj['y-axis']
         x2 = x1 + obj['width']
         y2 = y1 + obj['height']
-        emotion = obj['emotion'].keys.index(max(obj['emotion'].values()))
-        #emotion = list(obj['emotion'].keys())[0]
+        emotion = max(obj['emotion'].iteritems(), key=operator.itemgetter(1))[0]
+        #emotion = obj['emotion'].keys()[vals.index(max(vals))]
+        
         color = emotions[emotion]
         canvas.create_rectangle(x1, y1, x2, y2, width=1.5, outline=color)
         canvas.create_text(x1, y1-10,fill=color,text=emotion)
@@ -71,7 +73,7 @@ while True:
         #create a new thread
         filepath = msg['filepath'].decode('utf8')
         results = msg['results']
-        t = Thread(name='blocking', target=create_window(), args=(filepath, results))
+        t = Thread(name='blocking', target=create_window(filepath, results))
         t.start()
  
         #for thread in enumerate():

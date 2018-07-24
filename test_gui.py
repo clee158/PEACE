@@ -1,7 +1,7 @@
 import App.constants as const
 import uuid, pickle, socket, json
 
-filepath = "index.jpg"
+filepath = "index.jpeg"
 
 def get_emotion(h,s,f,c):
     return {
@@ -25,8 +25,8 @@ obj = {
     "filepath":filepath,
     "results": [
         get_face(200,200,20,20,get_emotion(.8,.1,.08,.02)),
-        get_face(400,350,30,40,get_emotion(.7,.1,.1,.1)),
-        get_face(600,430,20,20,get_emotion(.1,0,0,0,))
+        get_face(400,350,30,40,get_emotion(.2,.5,.1,.1)),
+        get_face(600,430,20,20,get_emotion(.1,0,.6,0,))
     ]
 }
 
