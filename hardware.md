@@ -18,7 +18,7 @@ Setup Manual link
 Setup wifi 
 Install necessary packages
 
--10" Monitor
+- 10" Monitor
 HDMI
 
 - Speaker
