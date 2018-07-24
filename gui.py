@@ -71,7 +71,7 @@ while True:
         #create a new thread
         filepath = msg['filepath'].decode('utf8')
         results = msg['results']
-        t = Thread(name='blocking', target=gui(), args=(filepath, results))
+        t = Thread(name='blocking', target=create_window(), args=(filepath, results))
         t.start()
  
         #for thread in enumerate():
