@@ -11,9 +11,9 @@ BUCKET_NAME = "rating-imgs"
 FACE_API_URL = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect"
 
 FRUSTRATED = "Frustrated"
-SCARED     = "Scared    "
-SAD        = "Sad       "
-HAPPY      = "Happy     "
+SCARED     = "Scared"
+SAD        = "Sad"
+HAPPY      = "Happy"
 
 SCARED_MP3 = "slowDown.mp3"
 FRUSTRATION_MP3 = "frustration.mp3"

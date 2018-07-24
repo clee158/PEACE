@@ -43,10 +43,20 @@ while True:
         faces = emotion.analyze_file(fileUrl)
 
         print(' [x] Sort Result')
-        emotions = custom.sort_results(faces)
+        results = custom.get_results(faces)
 
-        print(' [x] Display Result')
-        custom.print_result(emotions)
+        msg = {
+            "filepath":file_path,
+            "results":results
+        }
+        #print(msg) 
+        c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        c.connect((const.gui_ip, const.gui_port))
+        c.send(pickle.dumps(msg, protocol=2))
+        print(" [x] sent!")
+
+        #print(' [x] Display Result')
+        #custom.print_result(emotions)
         print()
         #print(' [x] Play Sound')
-        sound.play_sound(emotions)
+        #sound.play_sound(emotions)
