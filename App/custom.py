@@ -1,11 +1,12 @@
+import operator
 import App.constants as const
 
 def get_emotion(h,s,f,c):
     return {
-        "happy": h,
-        "sad": s,
-        "frustrated": f,
-        "scared": c
+        "Happy": h,
+        "Sad": s,
+        "Frustrated": f,
+        "Scared": c
     }
 
 def get_face(uid,x,y,w,h,e):
@@ -41,6 +42,10 @@ def get_results(faces):
             emotion
         ))
     return results
+
+def get_keyOfTopValue(emotions):
+    return max(emotions.items(), key=operator.itemgetter(1))[0]
+
 
 def print_result(emotions):
     for emotion in emotions:

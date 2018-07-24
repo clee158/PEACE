@@ -1,5 +1,5 @@
+from threading import *
 import sys, socket, pickle
-
 import App.constants as const
 import App.validations as validations
 import App.aws as aws
@@ -25,7 +25,6 @@ while True:
     if len(buf) > 0:
         file_path = buf.decode('ascii')
         print(' [x] Msg Recieved: {}'.format(file_path))
-#       file_path = sys.argv[-1]
 
         print(' [x] Check env')
         validations.env_check(const.ENV_VARS)
@@ -42,21 +41,21 @@ while True:
         print(' [x] Run Analysis')
         faces = emotion.analyze_file(fileUrl)
 
-        print(' [x] Sort Result')
+        print(' [x] Get Result')
         results = custom.get_results(faces)
-
+        
         msg = {
             "filepath":file_path,
             "results":results
         }
-        #print(msg) 
         c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         c.connect((const.gui_ip, const.gui_port))
         c.send(pickle.dumps(msg, protocol=2))
         print(" [x] sent!")
+        
+        print(' [x] Play Sound')
+        sound.play_sound(results)
 
         #print(' [x] Display Result')
         #custom.print_result(emotions)
-        print()
-        #print(' [x] Play Sound')
-        #sound.play_sound(emotions)
+         

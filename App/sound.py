@@ -1,14 +1,14 @@
 import vlc, time
 from mutagen.mp3 import MP3
 
+import App.custom as custom
 import App.constants as const
 
 def play_sound(emotions):
     topResults = []
     sound_directory_path = "./sounds/"
-    for emotion in emotions:
-        topResults.append(emotion[0][0])
-
+    for obj in emotions:
+        topResults.append(custom.get_keyOfTopValue(obj['emotion']))
     if const.SCARED in topResults:
         sound = sound_directory_path + const.SCARED_MP3
     elif const.FRUSTRATED in topResults:

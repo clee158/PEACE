@@ -1,11 +1,11 @@
-from threading import *
-from collections import OrderedDict
-import json, socket, cPickle, operator
 from Tkinter import *
 from PIL import Image, ImageTk
-import App.constants as const
 
-emotions = {'happy':'green', 'sad':'yellow', 'frustrated':'purple', 'scared':'red'}
+import json, socket, cPickle, operator, os
+import App.constants as const
+import App.custom as custom
+
+emotions = {'Happy':'green', 'Sad':'yellow', 'Frustrated':'purple', 'Scared':'red'}
 
 def create_window(filepath, data):
     # set up image
@@ -34,7 +34,6 @@ def create_window(filepath, data):
         x2 = x1 + obj['width']
         y2 = y1 + obj['height']
         emotion = max(obj['emotion'].iteritems(), key=operator.itemgetter(1))[0]
-        
         color = emotions[emotion]
         canvas.create_rectangle(x1, y1, x2, y2, width=1.5, outline=color)
         canvas.create_text(x1, y1-10,fill=color,text=emotion)
@@ -55,15 +54,14 @@ port = const.gui_port
 s.bind((ip, port))
 s.listen(1)
 
-t = None
-
 while True:
     print("Listening on {}:{}...".format(ip,port))
     conn,address = s.accept()
     buf = conn.recv(1024)
     if len(buf) > 0:
         msg = cPickle.loads(buf)
-        #create a new thread
+        # create a new thread
         filepath = msg['filepath'].decode('utf-8')
-        t = Thread(target=create_window, args=(filepath, msg['results']))
-        t.start()
+        create_window(filepath, msg['results'])
+        os.remove(filepath)
+        
