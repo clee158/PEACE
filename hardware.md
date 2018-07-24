@@ -3,11 +3,11 @@ This file will describe all the hardware we used and the setup thereof for you t
 Moreover, we've provided links on where to acquire them.
 
 ## Hardware we used
-- Creative VF0770 HD 720P USB Webcam Buy [here](https://www.amazon.com/Creative-Live-Sync-720P-Webcam/dp/B0092QJRPC)
-- Drangonboard 410c Development Board Buy [here](https://www.arrow.com/en/products/dragonboard410c/arrow-development-tools)
-- Lilliput 10" LCD Monitor Buy [here](https://www.bhphotovideo.com/c/search?Ntt=lilliput%2010.1&N=0&InitialSearch=yes&sts=ma&Top+Nav-Search=)
+- [Creative VF0770 HD 720P USB Webcam](https://www.amazon.com/Creative-Live-Sync-720P-Webcam/dp/B0092QJRPC)
+- [Drangonboard 410c Development Board](https://www.arrow.com/en/products/dragonboard410c/arrow-development-tools)
+- [Lilliput 10" LCD Monitor](https://www.bhphotovideo.com/c/search?Ntt=lilliput%2010.1&N=0&InitialSearch=yes&sts=ma&Top+Nav-Search=)
 - Speaker 
-- Logitech Wireless Keyboard K400 with Built-In Multi-Touch Touchpad Buy [here](https://www.amazon.com/Logitech-Wireless-Keyboard-Multi-Touch-Touchpad/dp/B005DKZTMG)
+- [Logitech Wireless Keyboard K400 with Built-In Multi-Touch Touchpad](https://www.amazon.com/Logitech-Wireless-Keyboard-Multi-Touch-Touchpad/dp/B005DKZTMG)
 
 ## Setup
 { things to keep in mind:
