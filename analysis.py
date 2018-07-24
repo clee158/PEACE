@@ -1,4 +1,4 @@
-import sys, socket
+import sys, socket, pickle
 
 import App.constants as const
 import App.validations as validations
@@ -36,8 +36,8 @@ while True:
         print(' [x] Upload to S3')
         fileUrl = aws.upload_images(file_path)
 
-        print(' [x] Delete Local File')
-        validations.remove_file(file_path)
+       # print(' [x] Delete Local File')
+       # validations.remove_file(file_path)
 
         print(' [x] Run Analysis')
         faces = emotion.analyze_file(fileUrl)
