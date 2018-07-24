@@ -1,16 +1,17 @@
-import threading
-import json
-from tkinter import *
+from threading import *
+from collections import OrderedDict
+from Tkinter import *
 from PIL import Image, ImageTk
+import json
 
 window = Tk()
+emotions = {'happy':'green', 'sad':'yellow', 'frustrated':'purple', 'scared':'red'}
 
-def gui():
+def gui(filepath, data):
+    #Thread(target=create_window(filepath, data['results'])).start()
     pass
 
-def window(filepath, data):
-    # parse data
-
+def create_window(filepath, data):
     # set up image
     img = Image.open(filepath)
     w, h = img.size
@@ -28,13 +29,19 @@ def window(filepath, data):
     canvas.pack()
     canvas.config(borderwidth=0, background='black', highlightcolor='black')
     canvas.create_image(0, 0, anchor=NW, image=img_tk)
-
-    outlines = ['white', 'yellow', 'red', 'green', 'blue']
-    canvas.create_rectangle(50, 50, 100, 100, width=1.5, outline='blue')
-
+    for obj in data:
+        x1 = obj['x-axis']
+        y1 = obj['y-axis']
+        x2 = x1 + obj['width']
+        y2 = y1 + obj['height']
+        emotion = list(obj['emotion'].keys())[0]
+        color = emotions[emotion]
+        canvas.create_rectangle(x1, y1, x2, y2, width=1.5, outline=color)
+        canvas.create_text(x1, y1-10,fill=color,text=emotion)
+    
     # open window
     window.mainloop()
 
-with open('../Downloads/data.txt') as json_file:
-    data = json.load(json_file)
-    window("./index.jpeg", data)
+json_file = open('../../../Downloads/data.txt').read()
+data = json.loads(json_file.decode('utf-8'), object_pairs_hook=OrderedDict)
+gui("./index.jpeg", data)
