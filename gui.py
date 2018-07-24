@@ -1,3 +1,4 @@
+import ast
 from threading import *
 from collections import OrderedDict
 import json, socket
@@ -8,14 +9,8 @@ import logging
 import App.constants as const
 import cPickle
 
-
 window = Tk()
 emotions = {'happy':'green', 'sad':'yellow', 'frustrated':'purple', 'scared':'red'}
-
-#def gui(filepath, data):
-    #json_file = open('../../../Downloads/data.txt').read()
-    #data = json.loads(json_file.decode('utf-8'), object_pairs_hook=OrderedDict)
-#    create_window(filepath, data['results'])
 
 def create_window(filepath, data):
     # set up image
@@ -40,7 +35,8 @@ def create_window(filepath, data):
         y1 = obj['y-axis']
         x2 = x1 + obj['width']
         y2 = y1 + obj['height']
-        emotion = list(obj['emotion'].keys())[0]
+        emotion = obj['emotion'].keys.index(max(obj['emotion'].values()))
+        #emotion = list(obj['emotion'].keys())[0]
         color = emotions[emotion]
         canvas.create_rectangle(x1, y1, x2, y2, width=1.5, outline=color)
         canvas.create_text(x1, y1-10,fill=color,text=emotion)
@@ -71,15 +67,18 @@ while True:
         # if there is a existing thread kill it
         if t is not None and t.isAlive():
             t._Thread_stop()
-        
+       
+        #create a new thread
+        filepath = msg['filepath'].decode('utf8')
+        results = msg['results']
+        t = Thread(name='blocking', target=gui(), args=(filepath, results))
+        t.start()
+ 
         #for thread in enumerate():
         #  if thread.isAlive():
         #       thread._Thread_stop()
         
-        #create a new thread
-        filepath = 'filepath'
-        data= 'data'
-        t = Thread(name='blocking', target=gui(), args=(filepath, data))
-        t.start()
-        print msg
-        
+        #print msg
+        #for person in msg['results']:
+        #    print person['emotion']
+        #print msg['filepath'].decode('utf8')
