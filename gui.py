@@ -1,4 +1,6 @@
-import threading, ast
+import ast
+from threading import *
+from collections import OrderedDict
 import json, socket
 from Tkinter import *
 from PIL import Image, ImageTk
@@ -8,13 +10,13 @@ import cPickle
 
 '''
 window = Tk()
+emotions = {'happy':'green', 'sad':'yellow', 'frustrated':'purple', 'scared':'red'}
 
-def gui():
+def gui(filepath, data):
+    #Thread(target=create_window(filepath, data['results'])).start()
     pass
 
-def window(filepath, data):
-    # parse data
-
+def create_window(filepath, data):
     # set up image
     img = Image.open(filepath)
     w, h = img.size
@@ -32,23 +34,18 @@ def window(filepath, data):
     canvas.pack()
     canvas.config(borderwidth=0, background='black', highlightcolor='black')
     canvas.create_image(0, 0, anchor=NW, image=img_tk)
-
-    outlines = ['white', 'yellow', 'red', 'green', 'blue']
-    canvas.create_rectangle(50, 50, 100, 100, width=1.5, outline='blue')
-
+    for obj in data:
+        x1 = obj['x-axis']
+        y1 = obj['y-axis']
+        x2 = x1 + obj['width']
+        y2 = y1 + obj['height']
+        emotion = list(obj['emotion'].keys())[0]
+        color = emotions[emotion]
+        canvas.create_rectangle(x1, y1, x2, y2, width=1.5, outline=color)
+        canvas.create_text(x1, y1-10,fill=color,text=emotion)
+    
     # open window
     window.mainloop()
-
-with open('../Downloads/data.txt') as json_file:
-    data = json.load(json_file)
-    window("./index.jpeg", data)
-'''
-
-def convert_keys_to_string(d):
-    if not isinstance(d, dict):
-        return d
-    return dict((str(k), convert_keys_to_string(v))
-        for k,v in d.items())
 
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -72,3 +69,4 @@ while True:
             print person['emotion']
         print msg['filepath'].decode('utf8')
 
+        # add things here
