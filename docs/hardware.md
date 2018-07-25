@@ -13,7 +13,7 @@ Moreover, we've provided links on where to acquire them.
 { things to keep in mind:
 - Webcam
 USB
-Gstreamer
+Gstreamer $ gst-launch-1.0 v4l2src num-buffers=1 ! jpegenc ! filesink location=/home/linaro/pic/image.jpg
 
 - Dragonboard 410C
 Setup Manual link
