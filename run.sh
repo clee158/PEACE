@@ -1,11 +1,5 @@
 #!/bin/bash
 
-TARGET=./pics
-
-export APIKEY=""
-export ACCESSKEY=""
-export SECRETKEY=""
-
 while true
 do
     echo "=====> ready"
@@ -14,7 +8,7 @@ do
     sleep 1s
     echo "================> cheese!"
     python3 ./camera.py 
-    echo ""
+    echo "* click *"
     echo "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *"
     echo ""
 done
