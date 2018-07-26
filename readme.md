@@ -4,7 +4,7 @@
 [**Click here to watch the video!**](https://youtu.be/Ej8GHj4GGv0)
 
 ## What is it?
-Passenger Emotion Analysis for Commute Enhancement (PEACE) helps fine tune the autonomous vehicle's driving ability through machine learning that detects passenger's faces and runs sentiment analysis on their facial expressions. This will be used in autonomous vehicles to for the vehicles to learn about the driving style that riders prefer.
+Passenger Emotion Analysis for Commute Enhancement (PEACE) helps fine tune the autonomous vehicle's driving ability through machine learning that detects passenger's faces and runs sentiment analysis on facial expressions. This will be used in autonomous vehicles to for the vehicles to learn about the driving style that riders prefer.
 
 
 ## Project Structure
