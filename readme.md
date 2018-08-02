@@ -32,7 +32,10 @@ SECRETKEY | follow [this](https://bit.ly/2NLWzu6) guide to get it
 - Please refer to hardware documentation [here](docs/hardware.md)
 
 ### Step 2: Setup your S3 bucket on AWS to store the pictures
-- Please refer to S3 bucket setup documentation [here](docs/s3setup.md)
+- Please refer to S3 bucket setup documentation [here](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
+- Double check that you can access the files in your S3 bucket that you created
+- In App/constants.py, set BUCKET_NAME as the Bucket name of the S3 bucket that you just setup.
+    - For example, if you created a S3 bucket named "new-bucket", it should be BUCKET_NAME="new-bucket"
 
 ### Step 3: Install all dependencies
 - Run the install script
